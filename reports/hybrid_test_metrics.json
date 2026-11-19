@@ -1,0 +1,105 @@
+{
+  "n_test": 47074,
+  "phishing_share": 0.4271,
+  "config_version": "hybrid-v1",
+  "model_version": "rf-host-v1",
+  "cut_points": {
+    "low": 0.23526,
+    "high": 0.56803
+  },
+  "INFLATED": "Legitimate test URLs are all bare https://www.<host> homepages, so full-URL rules (no_https, path/query rules) cannot misfire on them here. Rules-only and hybrid numbers overstate real-world performance; the M8 hand-made list is the real check.",
+  "ml_only": {
+    "tier_distribution": {
+      "phishing": {
+        "Low": 885,
+        "Medium": 5205,
+        "High": 14014,
+        "Unknown": 0
+      },
+      "legitimate": {
+        "Low": 9577,
+        "Medium": 16738,
+        "High": 655,
+        "Unknown": 0
+      }
+    },
+    "flag_medium_or_high": {
+      "precision": 0.5249,
+      "recall": 0.956,
+      "false_alarm_rate": 0.6449,
+      "tp": 19219,
+      "fp": 17393
+    },
+    "flag_high_only": {
+      "precision": 0.9553,
+      "recall": 0.6971,
+      "false_alarm_rate": 0.0243,
+      "tp": 14014,
+      "fp": 655
+    }
+  },
+  "rules_only": {
+    "tier_distribution": {
+      "phishing": {
+        "Low": 19660,
+        "Medium": 444,
+        "High": 0,
+        "Unknown": 0
+      },
+      "legitimate": {
+        "Low": 26970,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      }
+    },
+    "flag_medium_or_high": {
+      "precision": 1.0,
+      "recall": 0.0221,
+      "false_alarm_rate": 0.0,
+      "tp": 444,
+      "fp": 0
+    },
+    "flag_high_only": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "false_alarm_rate": 0.0,
+      "tp": 0,
+      "fp": 0
+    }
+  },
+  "hybrid": {
+    "tier_distribution": {
+      "phishing": {
+        "Low": 881,
+        "Medium": 5208,
+        "High": 14015,
+        "Unknown": 0
+      },
+      "legitimate": {
+        "Low": 9577,
+        "Medium": 16738,
+        "High": 655,
+        "Unknown": 0
+      }
+    },
+    "flag_medium_or_high": {
+      "precision": 0.525,
+      "recall": 0.9562,
+      "false_alarm_rate": 0.6449,
+      "tp": 19223,
+      "fp": 17393
+    },
+    "flag_high_only": {
+      "precision": 0.9554,
+      "recall": 0.6971,
+      "false_alarm_rate": 0.0243,
+      "tp": 14015,
+      "fp": 655
+    }
+  },
+  "escalated_by_rules": {
+    "phishing": 5,
+    "legitimate": 0
+  }
+}

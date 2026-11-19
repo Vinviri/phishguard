@@ -20,7 +20,7 @@
 
 | M5 Rules | Done | `src/rules.py`: 16 rules (5 strong, 9 weak, 2 info), `src/brands.json`, 84 rule tests; strong rules fire on 1 / 107,880 legitimate train URLs |
 
-| M6 Hybrid | Frozen (tag `m6-frozen`); locked test evaluation pending | `src/hybrid.py`, `src/hybrid_config.json` (low 0.235 / high 0.568), README method section, 120 hybrid tests |
+| M6 Hybrid | Done (awaiting review): locked test evaluation run once after `m6-frozen`; High precision 0.955 / recall 0.697; rules escalated 5 phishing, 0 legitimate (inflated, see `reports/hybrid_evaluation.md`) | `src/hybrid.py`, `src/hybrid_config.json` (low 0.235 / high 0.568), README method section, 120 hybrid tests |
 
 | M7 Streamlit app | Not started | Phase 4 |
 
@@ -89,12 +89,16 @@
 | 2026-11-19 | Tier labels are "Low/Medium/High risk indicators"; Low is never called safe; README states ~5 % of training phishing is Low by design and that precision depends on the 42.7 % phishing share | User decision; brief requires indicators, not verdicts |
 | 2026-11-19 | Freeze at tag `m6-frozen`: rules.py, brands.json, hybrid_config.json, hybrid.py tier logic, requirements.txt. The locked hybrid test evaluation runs only after this commit | User decision; proves the evaluation could not influence the logic |
 
+| 2026-11-19 | Locked hybrid test evaluation run once (2026-11-19T03:24:54Z) after `m6-frozen`; lock `reports/.hybrid_test_evaluated` committed with the results | User decision; no logic changed afterwards (frozen files identical to the tag) |
+
 ## Disclosures
 
 - **2 test rows seen before the split (not used for any decision).** Before the split existed, ~20 raw URLs were printed to verify the label direction (the UCI page is contradictory). Two of them later landed in the test set: `ecolabelindex.com` (legitimate homepage) and an `infura-ipfs.io` phishing URL. No feature, setting or threshold was based on them. Everything else that informed design used the train split only.
 - **Test set was viewed for the false-positive review** after the single evaluation. Findings go to the limitations and the Phase 3 rules, not back into the model.
 
 ## Open questions
+
+- **From the hybrid evaluation:** on PhiUSIIL the rules barely change tiers (5 phishing escalated), because strong rules are rare there and the model already rates those URLs High. Their real-world value must be shown with the M8 hand-made list. Medium holds 62 % of legitimate test URLs, so the app must present Medium as "check carefully".
 
 
 

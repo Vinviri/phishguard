@@ -24,9 +24,9 @@
 
 | M7 Streamlit app | Done | `app.py`, `src/presentation.py`, `.streamlit/config.toml`, 41 app tests incl. Streamlit AppTest; launches headless on localhost |
 
-| M8 Testing & docs | Done (awaiting review) | Manual list (32 legit, 25 real + 11 synthetic phishing, 15 platform descriptive), one locked run after tag `m8-start`: real phishing High 13/25, missed 4/25; legit High 11/32. Final README, `reports/manual_evaluation.md`, `reports/test_summary.md` (366 passed) |
+| M8 Testing & docs | Done | Manual list (32 legit, 25 real + 11 synthetic phishing, 15 platform descriptive), one locked run after tag `m8-start`: real phishing High 13/25, missed 4/25; legit High 11/32. Final README, `reports/manual_evaluation.md`, `reports/test_summary.md` (366 passed) |
 
-| M9 GitHub | Not started | Phase 4 |
+| M9 GitHub | In progress | Release prepared locally (MIT LICENSE, model committed with SHA-256, README headline). Pre-push checks done; push awaiting author-email decision |
 
 
 
@@ -105,6 +105,9 @@
 | 2026-11-19 | OpenPhish URLs not committed (redistribution not confirmed): raw feed, sampled inputs and the full list are git-ignored; the committed list withholds them; reports show only id/category/score/tier/rules | User decision |
 | 2026-11-19 | Manual evaluation run once (2026-11-19T05:01:26Z, lock `reports/.manual_evaluated`); proposals in the report were NOT applied | User requirement; any change needs a new, separate list |
 
+| 2026-11-19 | Commit `models/phishguard_rf.joblib` (11.3 MB, SHA-256 e6846267…) with a pickle security note in README | User decision (M9) |
+| 2026-11-19 | Public repo `phishguard`; MIT License for code; data licenses (PhiUSIIL CC BY 4.0) listed separately; OpenPhish not included | User decision (M9) |
+
 ## Disclosures
 
 - **2 test rows seen before the split (not used for any decision).** Before the split existed, ~20 raw URLs were printed to verify the label direction (the UCI page is contradictory). Two of them later landed in the test set: `ecolabelindex.com` (legitimate homepage) and an `infura-ipfs.io` phishing URL. No feature, setting or threshold was based on them. Everything else that informed design used the train split only.
@@ -113,7 +116,7 @@
 ## Open questions
 
 - **From the manual evaluation (proposals only, not applied):** 10 of 11 legitimate false alarms come from the subdomain bias; the rules changed no tier on the manual list; all 4 misses are short bare domains with phishing in the path. Fixes (retrain with legitimate subdomain URLs, cap subdomain-driven model tiers, path-aware signals) need a new design freeze and a **new, separate** evaluation list.
-- M9: whether to commit the 11.3 MB model file or keep the rebuild steps only; confirm nothing from the OpenPhish feed is pushed.
+- ~~M9 model file / OpenPhish check~~: model committed; history scan found no OpenPhish URL.
 
 - **From the hybrid evaluation:** on PhiUSIIL the rules barely change tiers (5 phishing escalated), because strong rules are rare there and the model already rates those URLs High. Their real-world value must be shown with the M8 hand-made list. Medium holds 62 % of legitimate test URLs, so the app must present Medium as "check carefully".
 

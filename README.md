@@ -8,15 +8,18 @@ It is an educational prototype (see `PROJECT_BRIEF.md`), not a production securi
 > external threat-intelligence services, and does not log, store or send the URLs you enter.
 > Results are risk indicators, not a guarantee that a site is malicious or safe.
 
-**In one paragraph.** On the PhiUSIIL test set the hybrid looks strong (95.5 % precision for "High"), but
-that test set is inflated: its legitimate URLs are all bare homepages. On a hand-made list of realistic URLs
-(the real check), PhishGuard put 13 of 25 real, current phishing URLs in High and missed 4, but it also put
-11 of 32 legitimate URLs in High, 10 of them because they have a subdomain. Read the
+**Headline result.** PhishGuard is a prototype that **over-flags subdomains**. On a hand-made list of
+realistic URLs that share no domain with the training data (the real check, M8), it put **11 of 32 legitimate
+URLs in High** (10 of them because they have a subdomain) and left **4 of 25 real, current phishing URLs in
+Low**; 13 of 25 phishing URLs reached High. The PhiUSIIL test-set numbers (95.5 % precision for "High") are
+inflated because that test set's legitimate URLs are all bare homepages. Read the
 [evaluation summary](#evaluation-summary) and [limitations](#limitations) before relying on any result.
 
 ## Install (Windows, Python 3.11)
 
 ```bash
+git clone https://github.com/Vinviri/phishguard.git
+cd phishguard
 py -3.11 -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
@@ -34,9 +37,23 @@ streamlit run app.py
 Open http://localhost:8501. The app listens on this machine only (`.streamlit/config.toml`), sends no usage
 statistics and never shows tracebacks. If it says the model is not available, rebuild it (next section).
 
-## Rebuild the model
+## The trained model
 
-`models/*.joblib` is git-ignored, so a fresh clone has no model. The committed files
+The trained Random Forest is committed as `models/phishguard_rf.joblib` (11.3 MB, model version
+`rf-host-v1`, scikit-learn 1.9.1).
+
+```
+SHA-256  e68462673e5362a8a97e193cef53572d787b2bf6d482e06e210743a614be397f  models/phishguard_rf.joblib
+```
+
+> **Security note.** joblib files are Python pickles: loading one can run arbitrary code. Only load
+> `phishguard_rf.joblib` if its SHA-256 matches the value above and it came from this repository, and never
+> load joblib or pickle files from sources you do not trust. Check it with
+> `certutil -hashfile models\phishguard_rf.joblib SHA256` (Windows) or `sha256sum models/phishguard_rf.joblib`.
+
+## Rebuild the model (optional)
+
+You only need this to reproduce training or if the model file is missing. The committed files
 (`data/processed/urls_clean.csv` with the fixed train/test split, `src/hybrid_config.json` with the frozen
 cut-points) are enough to retrain. Steps 1–2 are only needed to rebuild the split from scratch.
 
@@ -76,7 +93,7 @@ src/         features.py  - one parser + feature extractor used by training, rul
              data_prep.py, export_report.py, manual_list.py, manual_eval.py - data and evaluation scripts
 tests/       unit, integration and Streamlit AppTest tests (see reports/test_summary.md)
 reports/     evaluation reports, charts, lock files
-models/      trained model (git-ignored)
+models/      trained model (phishguard_rf.joblib, committed; see SHA-256 above)
 app.py       Streamlit app
 .streamlit/  app settings (localhost only, no usage stats, no tracebacks)
 ```
@@ -254,5 +271,12 @@ data, evaluated once through the real hybrid. Raw counts, small list:
 | Training and test data | PhiUSIIL Phishing URL Dataset, UCI ML Repository (dataset 967). Prasad & Chandra (2024), *Computers & Security* 136, 103545 | CC BY 4.0 | Cleaned URLs and split in `data/processed/` |
 | Real phishing for the manual list | OpenPhish community feed (openphish.com/feed.txt), downloaded 2026-11-19 | Redistribution not confirmed | **Not committed**; counts only |
 | Legitimate and synthetic manual-list URLs | Written for this project | - | `data/eval/manual_urls.csv` (defanged) |
+
+## License
+
+- **Code:** MIT License, see `LICENSE`.
+- **Data is not covered by the MIT License.** The PhiUSIIL-derived files in `data/processed/` are licensed
+  **CC BY 4.0** by their authors (attribution above). OpenPhish feed URLs are not included in this repository.
+- The trained model is derived from PhiUSIIL; credit the dataset (CC BY 4.0) when you reuse it.
 
 Status, decisions and their reasons: `PROGRESS.md`. Test coverage: `reports/test_summary.md`.

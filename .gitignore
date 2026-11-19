@@ -10,6 +10,8 @@ __pycache__/
 data/raw/*
 !data/raw/.gitkeep
 models/*.joblib
+# The trained model is committed (M9 decision); baselines stay local
+!models/phishguard_rf.joblib
 models/*.pkl
 
 # Streamlit

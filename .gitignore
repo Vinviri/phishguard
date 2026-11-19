@@ -1,0 +1,25 @@
+# Environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Data / models
+data/raw/*
+!data/raw/.gitkeep
+models/*.joblib
+models/*.pkl
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Logs (submitted URLs must never be persisted)
+*.log
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

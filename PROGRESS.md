@@ -18,7 +18,7 @@
 
 | M4 Model | Done | Host-only RF `rf-host-v1`: test PR-AUC 0.9085, phishing F1 0.810 (threshold 0.386); ties logistic regression (0.9100). See `reports/model_evaluation.md` |
 
-| M5 Rules | Not started | Phase 3 |
+| M5 Rules | Done (awaiting review) | `src/rules.py`: 16 rules (5 strong, 9 weak, 2 info), `src/brands.json`, 84 rule tests; strong rules fire on 1 / 107,880 legitimate train URLs |
 
 | M6 Hybrid | Not started | Phase 3 |
 
@@ -74,6 +74,15 @@
 | 2026-11-19 | `models/*.joblib` stays git-ignored for now (RF 11.3 MB) | Reproducible with `python -m src.model train`; ship-or-not decided in M9 |
 | 2026-11-19 | matplotlib 3.11.2 added to requirements | Report charts |
 | 2026-11-19 | Interactive Phase 2 report built as a private claude.ai dashboard; its data comes from `python -m src.export_report` (CSVs in `reports/dashboard/`) | User asked for a GUI report; the export script keeps the dashboard numbers reproducible from repo files |
+
+| 2026-11-19 | Phase 3 decisions: drop logistic regression from the app (report only); one locked hybrid test evaluation, labelled inflated, only after rules/tiers/cut-points are committed and frozen; ~95 %/95 % cut-points from train OOF; no allowlist, add "ML score may be inflated for subdomains" note | User decisions |
+| 2026-11-19 | `features.py` refactored to expose `url_parts()` / `analyze()`; rules and model share one parser. Re-extraction of all 235,370 URLs matched the saved feature tables exactly (0 mismatches), so the trained model is unaffected | One parsing path for training, rules and app |
+| 2026-11-19 | Rule strengths: strong = ip_host, at_in_host, lookalike_host (mixed script only), brand_in_subdomain, embedded_url_in_path (different registered domain, in the PATH); weak = idn_host (single-script), brand_in_domain, brand_in_path, url_in_query, no_https, keywords, long_or_encoded, risky_extension, deep_subdomains; info = shortener, archived_copy. Weights 3 / 1 / 0 | User decisions; brand in path and redirect params are common on legitimate URLs |
+| 2026-11-19 | `brand_in_domain` stays weak and must not be promoted on the train firing rate | Legit train URLs are bare homepages, so a low rate proves little (user decision) |
+| 2026-11-19 | Archive exception: on archive.org / archive.today family / webcache.googleusercontent.com, an embedded URL in the path does not fire `embedded_url_in_path`; info rule `archived_copy` explains it instead | `web.archive.org/web/2020/https://example.com` is a common legitimate pattern; the exception is a fixed list, so ordinary domains cannot use it |
+| 2026-11-19 | Weak-rule thresholds frozen: > 100 chars, > 3 %-encoded chars, >= 2 keywords, >= 3 subdomains, >= 4 hyphens | User decision; not tuned on test |
+| 2026-11-19 | Brand matching by whole token; prefix match for brands of 6+ letters, suffix match only for 7+ letters; 4 official domains added (apple.com.cn, google.org, aboutamazon.com/.in) | From the TRAIN-only firing review: `huaweicloud` matched `icloud`; official domains were missing |
+| 2026-11-19 | Rule firing rates checked on TRAIN only (`reports/rule_firing_train.csv`); no rule fires on > 1 % of legitimate train URLs | Catch over-firing rules without touching test. Path-based rules cannot fire on legit train URLs (no paths), so a hand-written real-world legitimate list in `tests/test_rules.py` covers them |
 
 ## Disclosures
 

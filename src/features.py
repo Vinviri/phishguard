@@ -15,6 +15,9 @@ Feature groups (prefix = group):
     parse_error  1 if the string could not be parsed; all other features are then
                  best-effort (string-level counts still filled in)
 
+`url_parts(url)` exposes the parsed pieces (host, registered domain, path, ...) that
+`extract_features` is computed from, so the rule engine reuses the exact same parsing.
+
 Malformed input never raises.
 """
 from __future__ import annotations
@@ -23,6 +26,7 @@ import ipaddress
 import math
 import re
 from collections import Counter
+from dataclasses import dataclass
 from urllib.parse import urlsplit
 
 import tldextract
@@ -146,8 +150,84 @@ def _string_features(f: dict, s: str, raw_len: int) -> None:
     f["url_brand_keyword_count"] = _count_keywords(s, BRAND_KEYWORDS)
 
 
-def _host_features(f: dict, host: str) -> None:
+@dataclass(frozen=True)
+class URLParts:
+    """Parsed pieces of a URL string. Produced by `url_parts`; never raises."""
+    text: str = ""               # stripped input, truncated to MAX_ANALYZE_LEN
+    raw_length: int = 0          # length of the stripped input before truncation
+    is_string: bool = True       # False for non-string input (None counts as "")
+    has_scheme: bool = False     # input itself started with "<scheme>://"
+    split_ok: bool = False       # urlsplit succeeded
+    scheme: str = ""             # "http" is assumed when the input had no scheme
+    netloc: str = ""
+    host: str = ""               # lowercase hostname, trailing dot removed, "www." kept
+    host_nowww: str = ""         # host with a leading "www." removed
+    port: int | None = None
+    port_invalid: bool = False
+    path: str = ""
+    query: str = ""
+    fragment: str = ""
+    is_ip: bool = False
+    is_ipv6: bool = False
+    is_obfuscated_ip: bool = False
+    subdomain: str = ""          # from host_nowww, e.g. "a.b" for a.b.example.co.uk
+    domain: str = ""             # "example"
+    suffix: str = ""             # "co.uk"
+    registered_domain: str = ""  # "example.co.uk" ("" for IP hosts / unknown suffix)
+
+    @property
+    def parse_error(self) -> bool:
+        return (not self.is_string) or (not self.text) or (not self.split_ok) or (not self.host) or self.port_invalid
+
+
+def url_parts(url: object) -> URLParts:
+    if url is None:
+        url = ""
+    if not isinstance(url, str):
+        return URLParts(is_string=False)
+    raw = url.strip()
+    s = raw[:MAX_ANALYZE_LEN]
+    has_scheme = bool(_SCHEME_RE.match(s))
+    if not s:
+        return URLParts(text=s, raw_length=len(raw), has_scheme=has_scheme)
+    if s.startswith("//"):
+        to_parse = "http:" + s
+    elif has_scheme:
+        to_parse = s
+    else:
+        to_parse = "http://" + s
+    try:
+        sp = urlsplit(to_parse)
+        host = (sp.hostname or "").rstrip(".")
+    except ValueError:  # e.g. unbalanced IPv6 brackets
+        return URLParts(text=s, raw_length=len(raw), has_scheme=has_scheme)
+    try:
+        port, port_invalid = sp.port, False
+    except ValueError:  # non-numeric or out-of-range port
+        port, port_invalid = None, True
+
     h = host[4:] if host.startswith("www.") else host
+    ip_info: dict = {}
+    dom: dict = {}
+    if h:
+        try:
+            ip = ipaddress.ip_address(h)
+            ip_info = {"is_ip": True, "is_ipv6": ip.version == 6}
+        except ValueError:
+            if _parse_obfuscated_ipv4(h):
+                ip_info = {"is_ip": True, "is_obfuscated_ip": True}
+        if not ip_info:
+            ext = _EXTRACT(h)
+            dom = {"subdomain": ext.subdomain, "domain": ext.domain, "suffix": ext.suffix,
+                   "registered_domain": (ext.top_domain_under_public_suffix or "").lower()}
+    return URLParts(text=s, raw_length=len(raw), has_scheme=has_scheme, split_ok=True,
+                    scheme=sp.scheme.lower(), netloc=sp.netloc, host=host, host_nowww=h,
+                    port=port, port_invalid=port_invalid, path=sp.path, query=sp.query,
+                    fragment=sp.fragment, **ip_info, **dom)
+
+
+def _host_features(f: dict, p: URLParts) -> None:
+    h = p.host_nowww
     f["host_length"] = len(h)
     f["host_num_dots"] = h.count(".")
     f["host_num_hyphens"] = h.count("-")
@@ -160,26 +240,17 @@ def _host_features(f: dict, host: str) -> None:
     f["host_non_ascii"] = int(not h.isascii())
     f["host_suspicious_keyword_count"] = _count_keywords(h, SUSPICIOUS_KEYWORDS)
     f["host_brand_keyword_count"] = _count_keywords(h, BRAND_KEYWORDS)
-
-    try:
-        ip = ipaddress.ip_address(h)
+    if p.is_ip:
         f["host_is_ip"] = 1
-        f["host_is_ipv6"] = int(ip.version == 6)
+        f["host_is_ipv6"] = int(p.is_ipv6)
+        f["host_is_obfuscated_ip"] = int(p.is_obfuscated_ip)
         return
-    except ValueError:
-        pass
-    if _parse_obfuscated_ipv4(h):
-        f["host_is_ip"] = 1
-        f["host_is_obfuscated_ip"] = 1
-        return
-
-    ext = _EXTRACT(h)
-    sub_labels = [lab for lab in ext.subdomain.split(".") if lab] if ext.subdomain else []
+    sub_labels = [lab for lab in p.subdomain.split(".") if lab] if p.subdomain else []
     f["host_num_subdomains"] = len(sub_labels)
-    f["host_domain_length"] = len(ext.domain)
-    f["tld"] = ext.suffix
-    f["host_tld_length"] = len(ext.suffix)
-    f["host_tld_known"] = int(bool(ext.suffix))
+    f["host_domain_length"] = len(p.domain)
+    f["tld"] = p.suffix
+    f["host_tld_length"] = len(p.suffix)
+    f["host_tld_known"] = int(bool(p.suffix))
 
 
 def _path_features(f: dict, path: str, query: str, fragment: str) -> None:
@@ -196,46 +267,31 @@ def _path_features(f: dict, path: str, query: str, fragment: str) -> None:
     f["url_has_double_slash_redirect"] = int("//" in path)
 
 
+def features_from_parts(p: URLParts) -> dict:
+    """Feature dict for already-parsed parts (same result as extract_features)."""
+    f = dict(FEATURE_DEFAULTS)
+    if not p.is_string:
+        f["parse_error"] = 1
+        return f
+    _string_features(f, p.text, p.raw_length)
+    if not p.text or not p.split_ok:
+        f["parse_error"] = 1
+        return f
+    f["url_has_at_in_netloc"] = int("@" in p.netloc)
+    f["url_has_port"] = int(p.port is not None or p.port_invalid)
+    if p.host:
+        _host_features(f, p)
+    _path_features(f, p.path, p.query, p.fragment)
+    f["parse_error"] = int(p.parse_error)
+    return f
+
+
 def extract_features(url: object) -> dict:
     """Return a dict with exactly FEATURE_NAMES as keys, for any input. Never raises."""
-    f = dict(FEATURE_DEFAULTS)
-    if url is None:
-        url = ""
-    if not isinstance(url, str):
-        f["parse_error"] = 1
-        return f
+    return features_from_parts(url_parts(url))
 
-    raw = url.strip()
-    s = raw[:MAX_ANALYZE_LEN]
-    _string_features(f, s, len(raw))
-    if not s:
-        f["parse_error"] = 1
-        return f
 
-    if s.startswith("//"):
-        to_parse = "http:" + s
-    elif f["url_has_scheme"]:
-        to_parse = s
-    else:
-        to_parse = "http://" + s
-
-    try:
-        parts = urlsplit(to_parse)
-        host = (parts.hostname or "").rstrip(".")
-    except ValueError:  # e.g. unbalanced IPv6 brackets
-        f["parse_error"] = 1
-        return f
-
-    f["url_has_at_in_netloc"] = int("@" in parts.netloc)
-    try:
-        f["url_has_port"] = int(parts.port is not None)
-    except ValueError:  # non-numeric or out-of-range port
-        f["url_has_port"] = 1
-        f["parse_error"] = 1
-
-    if not host:
-        f["parse_error"] = 1
-    else:
-        _host_features(f, host)
-    _path_features(f, parts.path, parts.query, parts.fragment)
-    return f
+def analyze(url: object) -> tuple[URLParts, dict]:
+    """Parse once, return (parts, features). Used by the rule engine and the app."""
+    p = url_parts(url)
+    return p, features_from_parts(p)

@@ -1,0 +1,203 @@
+{
+  "_doc": [
+    "Brand list for the PhishGuard rule engine (src/rules.py): brand_in_subdomain, brand_in_domain, brand_in_path.",
+    "Each key is a brand keyword; its value lists the brand's OFFICIAL registered domains (eTLD+1).",
+    "A brand rule never fires when the URL's registered domain is one of that brand's official domains.",
+    "Matching is by whole token: host labels and paths are split on non-alphanumeric characters.",
+    "Keywords shorter than 6 letters must equal a token exactly ('pineapple' does not match 'apple', 'purchase' does not match 'chase').",
+    "Keywords of 6+ letters also match as a token PREFIX ('paypalsecure' matches 'paypal').",
+    "Keywords of 7+ letters also match as a token SUFFIX ('securepaypal' does not, 'mymicrosoft' does). The 7-letter",
+    "suffix limit exists because 'huaweicloud' matched 'icloud' in the train-set review (2026-11-19).",
+    "User-content hosts (amazonaws.com, blogspot.com, dropboxusercontent.com, googleusercontent.com) are deliberately NOT",
+    "listed as official: attackers can host pages there, so a brand name in their subdomain stays suspicious.",
+    "Train-set review (2026-11-19) added missing official domains: apple.com.cn, google.org, aboutamazon.com, aboutamazon.in.",
+    "Known limitation: the official lists are not exhaustive. A missing official domain can trigger a brand rule",
+    "(a false positive, never a crash). Fan/review sites (apple-history.com) and sites named after a brand",
+    "(google.blognewschannel.com) also trigger brand rules: documented false positives.",
+    "Edited by hand; never tuned on the test set."
+  ],
+  "brands": {
+    "paypal": [
+      "paypal.com",
+      "paypal.me",
+      "paypalobjects.com"
+    ],
+    "apple": [
+      "apple.com",
+      "icloud.com",
+      "me.com",
+      "apple.co",
+      "apple.com.cn"
+    ],
+    "icloud": [
+      "icloud.com",
+      "apple.com"
+    ],
+    "microsoft": [
+      "microsoft.com",
+      "microsoftonline.com",
+      "live.com",
+      "office.com",
+      "office365.com",
+      "outlook.com",
+      "windows.net",
+      "azure.com",
+      "bing.com",
+      "msn.com",
+      "skype.com",
+      "xbox.com",
+      "onedrive.com"
+    ],
+    "office365": [
+      "office365.com",
+      "office.com",
+      "microsoft.com",
+      "microsoftonline.com"
+    ],
+    "outlook": [
+      "outlook.com",
+      "live.com",
+      "office.com",
+      "office365.com",
+      "microsoft.com"
+    ],
+    "onedrive": [
+      "onedrive.com",
+      "live.com",
+      "microsoft.com"
+    ],
+    "google": [
+      "google.com",
+      "google.co.uk",
+      "google.de",
+      "google.fr",
+      "google.co.id",
+      "google.co.in",
+      "google.co.jp",
+      "google.com.br",
+      "google.ca",
+      "google.com.au",
+      "googleapis.com",
+      "gstatic.com",
+      "youtube.com",
+      "android.com",
+      "withgoogle.com",
+      "googleblog.com",
+      "google.org"
+    ],
+    "gmail": [
+      "gmail.com",
+      "google.com"
+    ],
+    "amazon": [
+      "amazon.com",
+      "amazon.co.uk",
+      "amazon.de",
+      "amazon.fr",
+      "amazon.it",
+      "amazon.es",
+      "amazon.nl",
+      "amazon.ca",
+      "amazon.com.au",
+      "amazon.com.br",
+      "amazon.co.jp",
+      "amazon.in",
+      "amazon.sg",
+      "primevideo.com",
+      "amazon.jobs",
+      "aboutamazon.com",
+      "aboutamazon.in"
+    ],
+    "netflix": [
+      "netflix.com",
+      "netflix.net",
+      "nflxext.com"
+    ],
+    "facebook": [
+      "facebook.com",
+      "fb.com",
+      "facebook.net",
+      "fbcdn.net",
+      "meta.com",
+      "messenger.com"
+    ],
+    "instagram": [
+      "instagram.com",
+      "cdninstagram.com"
+    ],
+    "whatsapp": [
+      "whatsapp.com",
+      "whatsapp.net",
+      "wa.me"
+    ],
+    "linkedin": [
+      "linkedin.com",
+      "licdn.com",
+      "lnkd.in"
+    ],
+    "dropbox": [
+      "dropbox.com",
+      "db.tt"
+    ],
+    "docusign": [
+      "docusign.com",
+      "docusign.net"
+    ],
+    "adobe": [
+      "adobe.com",
+      "adobelogin.com",
+      "adobe.io"
+    ],
+    "chase": [
+      "chase.com",
+      "jpmorganchase.com",
+      "jpmorgan.com"
+    ],
+    "wellsfargo": [
+      "wellsfargo.com",
+      "wf.com"
+    ],
+    "bankofamerica": [
+      "bankofamerica.com",
+      "bofa.com"
+    ],
+    "dhl": [
+      "dhl.com",
+      "dhl.de",
+      "dhl.co.uk",
+      "dpdhl.com"
+    ],
+    "fedex": [
+      "fedex.com"
+    ],
+    "usps": [
+      "usps.com",
+      "usps.gov"
+    ],
+    "ebay": [
+      "ebay.com",
+      "ebay.co.uk",
+      "ebay.de",
+      "ebay.fr",
+      "ebay.it",
+      "ebay.ca",
+      "ebay.com.au",
+      "ebayimg.com"
+    ],
+    "steam": [
+      "steampowered.com",
+      "steamcommunity.com",
+      "steamstatic.com"
+    ],
+    "binance": [
+      "binance.com",
+      "binance.us"
+    ],
+    "coinbase": [
+      "coinbase.com"
+    ],
+    "metamask": [
+      "metamask.io"
+    ]
+  }
+}

@@ -18,9 +18,9 @@
 
 | M4 Model | Done | Host-only RF `rf-host-v1`: test PR-AUC 0.9085, phishing F1 0.810 (threshold 0.386); ties logistic regression (0.9100). See `reports/model_evaluation.md` |
 
-| M5 Rules | Done (awaiting review) | `src/rules.py`: 16 rules (5 strong, 9 weak, 2 info), `src/brands.json`, 84 rule tests; strong rules fire on 1 / 107,880 legitimate train URLs |
+| M5 Rules | Done | `src/rules.py`: 16 rules (5 strong, 9 weak, 2 info), `src/brands.json`, 84 rule tests; strong rules fire on 1 / 107,880 legitimate train URLs |
 
-| M6 Hybrid | Not started | Phase 3 |
+| M6 Hybrid | Frozen (tag `m6-frozen`); locked test evaluation pending | `src/hybrid.py`, `src/hybrid_config.json` (low 0.235 / high 0.568), README method section, 120 hybrid tests |
 
 | M7 Streamlit app | Not started | Phase 4 |
 
@@ -83,6 +83,11 @@
 | 2026-11-19 | Weak-rule thresholds frozen: > 100 chars, > 3 %-encoded chars, >= 2 keywords, >= 3 subdomains, >= 4 hyphens | User decision; not tuned on test |
 | 2026-11-19 | Brand matching by whole token; prefix match for brands of 6+ letters, suffix match only for 7+ letters; 4 official domains added (apple.com.cn, google.org, aboutamazon.com/.in) | From the TRAIN-only firing review: `huaweicloud` matched `icloud`; official domains were missing |
 | 2026-11-19 | Rule firing rates checked on TRAIN only (`reports/rule_firing_train.csv`); no rule fires on > 1 % of legitimate train URLs | Catch over-firing rules without touching test. Path-based rules cannot fire on legit train URLs (no paths), so a hand-written real-world legitimate list in `tests/test_rules.py` covers them |
+
+| 2026-11-19 | High cut-point = lowest score where train-OOF precision stays >= 95 % for it and every higher score (running minimum) → 0.56803; Low cut-point = 5th percentile of train-OOF phishing scores → 0.23526 | User decision (~95 %/95 %); method and data hash recorded in `src/hybrid_config.json` |
+| 2026-11-19 | Escalation: >= 2 strong → High; 1 strong → +1 tier; >= 3 weak → Low becomes Medium; info never changes the tier; rules never lower | Strong rules are rare on legit URLs; weak rules are noisy so they can never produce High alone |
+| 2026-11-19 | Tier labels are "Low/Medium/High risk indicators"; Low is never called safe; README states ~5 % of training phishing is Low by design and that precision depends on the 42.7 % phishing share | User decision; brief requires indicators, not verdicts |
+| 2026-11-19 | Freeze at tag `m6-frozen`: rules.py, brands.json, hybrid_config.json, hybrid.py tier logic, requirements.txt. The locked hybrid test evaluation runs only after this commit | User decision; proves the evaluation could not influence the logic |
 
 ## Disclosures
 

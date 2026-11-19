@@ -1,0 +1,35 @@
+{
+  "version": "hybrid-v1",
+  "derived_at_utc": "2026-11-19T03:23:09+00:00",
+  "cut_points": {
+    "low": 0.23526,
+    "high": 0.56803
+  },
+  "method": {
+    "data": "reports/oof_predictions_train.csv.gz: out-of-fold Random Forest scores on the TRAIN split (StratifiedGroupKFold(5) by registered domain). The test split is not used.",
+    "data_sha256": "c0cab7fb890ddeb493f8564bc89f8201495641d062dd9b1440b203e9119b52ed",
+    "high": "Lowest score s such that precision (phishing among URLs scoring >= t) is >= 0.95 for t = s and for every higher score t (running minimum of precision from the top).",
+    "low": "5th percentile of training phishing OOF scores: about 5 % of training phishing falls in Low by design.",
+    "tiers": "High: score >= high; Low: score < low; Medium: otherwise.",
+    "escalation": ">= 2 strong rule hits -> High; 1 strong -> one tier up; >= 3 weak hits -> Low becomes Medium; info hits never change the tier; rules never lower the tier.",
+    "prevalence_caveat": "Precision depends on the phishing share of the data (42.7% in train). Real-world traffic has far less phishing, so real precision at these cut-points is lower."
+  },
+  "train_oof_check": {
+    "phishing_share": 0.4271,
+    "precision_at_high": 0.95,
+    "phishing_recall_at_high": 0.6658,
+    "phishing_share_below_low": 0.0499,
+    "tier_distribution": {
+      "phishing": {
+        "Low": 0.0499,
+        "Medium": 0.2843,
+        "High": 0.6658
+      },
+      "legitimate": {
+        "Low": 0.3765,
+        "Medium": 0.5974,
+        "High": 0.0261
+      }
+    }
+  }
+}

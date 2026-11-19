@@ -1,0 +1,18 @@
+# PhishGuard privacy-minded Streamlit settings
+[browser]
+# Do not send usage statistics to Streamlit.
+gatherUsageStats = false
+
+[client]
+# Never show tracebacks (which could include internals) in the browser.
+showErrorDetails = "none"
+# Hide developer options (deploy, clear cache) from viewers.
+toolbarMode = "viewer"
+
+[logger]
+# Streamlit's own logger: errors only. PhishGuard itself never logs submitted URLs.
+level = "error"
+
+[server]
+# Local deployment only: listen on this machine, not on the network.
+address = "localhost"

@@ -20,9 +20,9 @@
 
 | M5 Rules | Done | `src/rules.py`: 16 rules (5 strong, 9 weak, 2 info), `src/brands.json`, 84 rule tests; strong rules fire on 1 / 107,880 legitimate train URLs |
 
-| M6 Hybrid | Done (awaiting review): locked test evaluation run once after `m6-frozen`; High precision 0.955 / recall 0.697; rules escalated 5 phishing, 0 legitimate (inflated, see `reports/hybrid_evaluation.md`) | `src/hybrid.py`, `src/hybrid_config.json` (low 0.235 / high 0.568), README method section, 120 hybrid tests |
+| M6 Hybrid | Done: locked test evaluation run once after `m6-frozen`; High precision 0.955 / recall 0.697; rules escalated 5 phishing, 0 legitimate (inflated, see `reports/hybrid_evaluation.md`) | `src/hybrid.py`, `src/hybrid_config.json` (low 0.235 / high 0.568), README method section, 120 hybrid tests |
 
-| M7 Streamlit app | Not started | Phase 4 |
+| M7 Streamlit app | Done (awaiting review) | `app.py`, `src/presentation.py`, `.streamlit/config.toml`, 41 app tests incl. Streamlit AppTest; launches headless on localhost |
 
 | M8 Testing & docs | Not started | Phase 4 |
 
@@ -90,6 +90,13 @@
 | 2026-11-19 | Freeze at tag `m6-frozen`: rules.py, brands.json, hybrid_config.json, hybrid.py tier logic, requirements.txt. The locked hybrid test evaluation runs only after this commit | User decision; proves the evaluation could not influence the logic |
 
 | 2026-11-19 | Locked hybrid test evaluation run once (2026-11-19T03:24:54Z) after `m6-frozen`; lock `reports/.hybrid_test_evaluated` committed with the results | User decision; no logic changed afterwards (frozen files identical to the tag) |
+
+| 2026-11-19 | App labels: Low = "Low risk indicators" (blue-grey, not green), Medium = "Inconclusive, check carefully", High = "High risk indicators", Unknown = "Can't analyze this input"; kept in `src/presentation.py` so the frozen `hybrid.py` is unchanged | User decisions |
+| 2026-11-19 | Privacy in the app: only the model is cached (`st.cache_resource`, keyed by model path); no `st.cache_data`; no logging or print; no history beyond the input box; errors are generic and never echo the URL | User requirements; enforced by source-check tests |
+| 2026-11-19 | Input is shown defanged (`hxxps://example[.]com`) in `st.code`, never as a link or Markdown; rule reasons are Markdown-escaped; only fixed label text goes into the one HTML badge | Prevents clickable links and HTML/script injection; AppTest covers `<script>`, `<img onerror>`, Markdown links and `javascript:` input |
+| 2026-11-19 | Model loading guarded: missing file, scikit-learn version different from the one recorded in the model, or an unreadable file shows a generic message pointing to README and stops; never a traceback | User requirement; tested with AppTest |
+| 2026-11-19 | `.streamlit/config.toml`: `server.address = localhost`, `gatherUsageStats = false`, `showErrorDetails = "none"`, `toolbarMode = "viewer"`, logger level error | The first headless launch listened on all network interfaces; the brief is localhost deployment |
+| 2026-11-19 | Example buttons use reserved example domains only (example.com/.org, `.example`, 192.0.2.0/24) | User option; no real sites shown as phishing examples |
 
 ## Disclosures
 

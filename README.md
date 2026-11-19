@@ -13,17 +13,49 @@ Educational prototype; see `PROJECT_BRIEF.md` for the full specification.
 py -3.11 -m venv .venv
 .venv\Scripts\activate
 pip install -r requirements.txt
+```
+
+Use exactly the versions in `requirements.txt`. The saved model records its scikit-learn version, and
+the app refuses to use a model saved with a different version.
+
+## Run the app
+
+```bash
+streamlit run app.py
+```
+
+Open http://localhost:8501. The app listens on this machine only (`.streamlit/config.toml`), sends no
+usage statistics and never shows tracebacks. If it says the model is not available, rebuild it (next section).
+
+## Rebuild the model
+
+`models/*.joblib` is git-ignored, so a fresh clone has no model. The committed files
+(`data/processed/urls_clean.csv` with the fixed train/test split, `src/hybrid_config.json` with the frozen
+cut-points) are enough to retrain. Steps 1–2 are only needed to rebuild the split from scratch.
+
+```bash
+# 1. (optional) get the raw data - PhiUSIIL, UCI dataset 967, CC BY 4.0
+mkdir -p data/raw/phiusiil
+curl -L -o data/raw/phiusiil/phiusiil.zip "https://archive.ics.uci.edu/static/public/967/phiusiil+phishing+url+dataset.zip"
+cd data/raw/phiusiil && tar -xf phiusiil.zip && cd ../../..
+
+# 2. (optional) clean the data and rebuild the grouped train/test split
+python -m src.data_prep
+
+# 3. build the feature tables (~20 s)
+python -m src.model build-features
+
+# 4. train the Random Forest on the train split (~40 min on a 12-core CPU)
+python -m src.model train
+
+# 5. run the tests (includes an end-to-end check of the saved model and the app)
 pytest
 ```
 
-Rebuild everything from the raw dataset (see `data/README.md` for the download):
-
-```bash
-python -m src.data_prep               # clean data, grouped train/test split
-python -m src.model build-features    # feature tables
-python -m src.model train             # baselines, grid search, threshold, model (train split only)
-python -m src.hybrid derive-config    # tier cut-points from train out-of-fold scores
-```
+Do **not** run `python -m src.model evaluate`, `python -m src.hybrid evaluate` or
+`python -m src.hybrid derive-config` again: the test set was evaluated once (lock files in `reports/`)
+and the cut-points are frozen at tag `m6-frozen`. Retraining with the same versions reproduces the same
+model (fixed seeds).
 
 ## Layout
 
@@ -33,10 +65,12 @@ src/         features.py  - one parser + feature extractor used by training, rul
              rules.py     - rule engine;  brands.json - brand list for the brand rules
              model.py     - Random Forest training/evaluation;  hybrid.py - risk tiers
              hybrid_config.json - frozen tier cut-points and how they were derived
+             presentation.py - user-facing labels, colours and safe display for the app
 tests/       unit tests
 reports/     evaluation reports and charts
 models/      trained model (git-ignored, rebuild with `python -m src.model train`)
-app.py       Streamlit app (Phase 4)
+app.py       Streamlit app
+.streamlit/  app settings (localhost only, no usage stats, no tracebacks)
 ```
 
 ## How a URL is assessed
@@ -99,6 +133,19 @@ Rules can then **raise** the tier, **never lower it**:
 | info | no change |
 
 Input that cannot be parsed (empty, no host, invalid port) gets **"Cannot analyze"**, never a guess.
+
+**Labels shown in the app** (`src/presentation.py`):
+
+| Tier | Label | Colour |
+|---|---|---|
+| High | High risk indicators | red |
+| Medium | Inconclusive, check carefully | amber |
+| Low | Low risk indicators | blue-grey (not green, which would suggest "safe") |
+| Unknown | Can't analyze this input | grey |
+
+The app never says "safe" or "confirmed phishing". It shows the analyzed address defanged in a code block
+(`hxxps://example[.]com`), never as a link, and escapes rule reasons so HTML or script text in the input
+renders as plain text.
 
 **Why this design.**
 - The model is good at ranking hosts but biased by its training data, so it only sets a starting point.

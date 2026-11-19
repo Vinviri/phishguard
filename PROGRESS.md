@@ -26,7 +26,7 @@
 
 | M8 Testing & docs | Done | Manual list (32 legit, 25 real + 11 synthetic phishing, 15 platform descriptive), one locked run after tag `m8-start`: real phishing High 13/25, missed 4/25; legit High 11/32. Final README, `reports/manual_evaluation.md`, `reports/test_summary.md` (366 passed) |
 
-| M9 GitHub | In progress | Release prepared locally (MIT LICENSE, model committed with SHA-256, README headline). Pre-push checks done; push awaiting author-email decision |
+| M9 GitHub | In progress | Release prepared locally (MIT LICENSE, model committed with SHA-256, README headline). Pre-push checks done (no local paths, no OpenPhish URLs in history); author email rewritten to the GitHub no-reply address |
 
 
 
@@ -107,6 +107,35 @@
 
 | 2026-11-19 | Commit `models/phishguard_rf.joblib` (11.3 MB, SHA-256 e6846267…) with a pickle security note in README | User decision (M9) |
 | 2026-11-19 | Public repo `phishguard`; MIT License for code; data licenses (PhiUSIIL CC BY 4.0) listed separately; OpenPhish not included | User decision (M9) |
+| 2026-11-19 | Author/committer email rewritten to the GitHub no-reply address (112366468+Vinviri@users.noreply.github.com) on all commits before the first push; also set in global git config | User decision: keep the personal email out of the public history (see Commit hash mapping) |
+
+## Commit hash mapping (author rewrite, 2026-11-19)
+
+Before the first push, the author/committer email of all 11 commits was changed from a personal address to the
+GitHub no-reply address (`git filter-branch --env-filter`, dates and contents unchanged). Every commit hash
+changed; **every tree hash is identical** to the original (verified for all 11 commits, including `m6-frozen`,
+`m8-start` and the release commit), and the frozen files (rules.py, brands.json, hybrid_config.json, hybrid.py,
+features.py, model.py, requirements.txt) are blob-identical at both tags. Tags `m6-frozen` and `m8-start` were
+moved to the rewritten commits.
+
+**Lock files were not edited.** `reports/.test_evaluated`, `reports/.hybrid_test_evaluated` and
+`reports/.manual_evaluated` record times, tag names and file/model SHA-256 values, not commit hashes. Any commit
+hash quoted elsewhere in this file or in earlier phase reports (e.g. `24d96d2` for `m8-start`) is a
+**pre-rewrite** hash; use this table to find the published commit.
+
+| Old commit | New commit | Tree (unchanged) | Tag | Subject |
+|---|---|---|---|---|
+| `fea5de1c1ecf` | `9532df7181db` | `7e6ddeb3830a` |  | M1: project scaffold, venv setup, pinned dependencies |
+| `447696c4c7b6` | `17fa4a6d814e` | `1a98ec5b886c` |  | M2: PhiUSIIL dataset prep, grouped train/test split, bias report |
+| `cb71021826e2` | `2ba1bfef694c` | `3a1ae1e65039` |  | M3: URL feature extraction module with unit tests |
+| `c3f872717723` | `24abdfbbae63` | `f63cd889ec5e` |  | M4: host-only Random Forest with grouped CV tuning, baselines, one-tim |
+| `db5dc063c55b` | `1cdfbb325ed7` | `1637e3306c8d` |  | M4: add dashboard data export script (reports/dashboard) |
+| `48b44b7641ca` | `4d43c012ac37` | `ef78503333f2` |  | M5: rule engine with strong/weak/info rules, brand list, train firing  |
+| `93f494e1c217` | `cd02d5c660bb` | `928969929f3a` | m6-frozen | M6: hybrid risk tiers (frozen before the locked test evaluation) |
+| `591c11fc81de` | `7d71a044dcf7` | `0654b4262338` |  | M6: locked hybrid test evaluation (ML-only vs rules-only vs hybrid, la |
+| `24d96d2e35da` | `c35859a5faf9` | `7dd89316796d` | m8-start | M7: Streamlit app with tiered risk display, privacy safeguards and App |
+| `f335f93fa86e` | `56b89fcd77ab` | `63cf89f889cd` |  | M8: manual evaluation list, one locked run, final README and test summ |
+| `ff128c81869c` | `91f96ff2be37` | `33aa1f409277` |  | M9: prepare public release (MIT license, committed model with SHA-256, |
 
 ## Disclosures
 

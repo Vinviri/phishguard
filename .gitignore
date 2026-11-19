@@ -26,3 +26,10 @@ Thumbs.db
 
 # Regenerable feature tables (python -m src.model build-features)
 data/processed/features_*.csv
+
+# Raw phishing feed for the M8 manual list (never committed, never fetched by code)
+data/eval/raw_feed/
+# OpenPhish URLs: redistribution not confirmed, never committed
+data/eval/real_phishing_input.csv
+data/eval/manual_urls_full.csv
+data/eval/real_platform_input.csv

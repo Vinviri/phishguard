@@ -1,0 +1,427 @@
+{
+  "n": 83,
+  "by_group": {
+    "legitimate": {
+      "n": 32,
+      "ml_tier": {
+        "Low": 4,
+        "Medium": 17,
+        "High": 11,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 31,
+        "Medium": 1,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 4,
+        "Medium": 17,
+        "High": 11,
+        "Unknown": 0
+      }
+    },
+    "synthetic_phishing": {
+      "n": 11,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 11,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 2,
+        "Medium": 9,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 11,
+        "Unknown": 0
+      }
+    },
+    "real_phishing": {
+      "n": 25,
+      "ml_tier": {
+        "Low": 4,
+        "Medium": 8,
+        "High": 13,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 25,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 4,
+        "Medium": 8,
+        "High": 13,
+        "Unknown": 0
+      }
+    },
+    "platform_phishing_descriptive": {
+      "n": 15,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 15,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 15,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 15,
+        "Unknown": 0
+      }
+    }
+  },
+  "by_category": {
+    "docs_subdomain": {
+      "n": 8,
+      "ml_tier": {
+        "Low": 1,
+        "Medium": 2,
+        "High": 5,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 8,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 1,
+        "Medium": 2,
+        "High": 5,
+        "Unknown": 0
+      }
+    },
+    "repo_path": {
+      "n": 4,
+      "ml_tier": {
+        "Low": 1,
+        "Medium": 3,
+        "High": 0,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 4,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 1,
+        "Medium": 3,
+        "High": 0,
+        "Unknown": 0
+      }
+    },
+    "login_redirect": {
+      "n": 7,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 4,
+        "High": 3,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 6,
+        "Medium": 1,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 4,
+        "High": 3,
+        "Unknown": 0
+      }
+    },
+    "archive": {
+      "n": 1,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 1,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 1,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 1,
+        "Unknown": 0
+      }
+    },
+    "shortener": {
+      "n": 1,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 1,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 1,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 1,
+        "Unknown": 0
+      }
+    },
+    "idn_single_script": {
+      "n": 2,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 2,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      }
+    },
+    "brand_in_path": {
+      "n": 3,
+      "ml_tier": {
+        "Low": 1,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 3,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 1,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      }
+    },
+    "long_ordinary": {
+      "n": 6,
+      "ml_tier": {
+        "Low": 1,
+        "Medium": 4,
+        "High": 1,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 6,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 1,
+        "Medium": 4,
+        "High": 1,
+        "Unknown": 0
+      }
+    },
+    "syn_ip_host": {
+      "n": 2,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 0,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      }
+    },
+    "syn_at_trick": {
+      "n": 1,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 1,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 0,
+        "Medium": 1,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 1,
+        "Unknown": 0
+      }
+    },
+    "syn_brand_subdomain": {
+      "n": 2,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 0,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      }
+    },
+    "syn_lookalike": {
+      "n": 2,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 0,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      }
+    },
+    "syn_embedded_url": {
+      "n": 2,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 0,
+        "Medium": 2,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      }
+    },
+    "syn_risky_extension": {
+      "n": 2,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 2,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 2,
+        "Unknown": 0
+      }
+    },
+    "real_feed": {
+      "n": 25,
+      "ml_tier": {
+        "Low": 4,
+        "Medium": 8,
+        "High": 13,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 25,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 4,
+        "Medium": 8,
+        "High": 13,
+        "Unknown": 0
+      }
+    },
+    "real_platform": {
+      "n": 15,
+      "ml_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 15,
+        "Unknown": 0
+      },
+      "rules_tier": {
+        "Low": 15,
+        "Medium": 0,
+        "High": 0,
+        "Unknown": 0
+      },
+      "hybrid_tier": {
+        "Low": 0,
+        "Medium": 0,
+        "High": 15,
+        "Unknown": 0
+      }
+    }
+  }
+}

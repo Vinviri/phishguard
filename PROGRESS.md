@@ -22,9 +22,9 @@
 
 | M6 Hybrid | Done: locked test evaluation run once after `m6-frozen`; High precision 0.955 / recall 0.697; rules escalated 5 phishing, 0 legitimate (inflated, see `reports/hybrid_evaluation.md`) | `src/hybrid.py`, `src/hybrid_config.json` (low 0.235 / high 0.568), README method section, 120 hybrid tests |
 
-| M7 Streamlit app | Done (awaiting review) | `app.py`, `src/presentation.py`, `.streamlit/config.toml`, 41 app tests incl. Streamlit AppTest; launches headless on localhost |
+| M7 Streamlit app | Done | `app.py`, `src/presentation.py`, `.streamlit/config.toml`, 41 app tests incl. Streamlit AppTest; launches headless on localhost |
 
-| M8 Testing & docs | Not started | Phase 4 |
+| M8 Testing & docs | Done (awaiting review) | Manual list (32 legit, 25 real + 11 synthetic phishing, 15 platform descriptive), one locked run after tag `m8-start`: real phishing High 13/25, missed 4/25; legit High 11/32. Final README, `reports/manual_evaluation.md`, `reports/test_summary.md` (366 passed) |
 
 | M9 GitHub | Not started | Phase 4 |
 
@@ -98,12 +98,22 @@
 | 2026-11-19 | `.streamlit/config.toml`: `server.address = localhost`, `gatherUsageStats = false`, `showErrorDetails = "none"`, `toolbarMode = "viewer"`, logger level error | The first headless launch listened on all network interfaces; the brief is localhost deployment |
 | 2026-11-19 | Example buttons use reserved example domains only (example.com/.org, `.example`, 192.0.2.0/24) | User option; no real sites shown as phishing examples |
 
+| 2026-11-19 | Tag `m8-start` before building and evaluating the manual list; the evaluation script refuses to run if rules, brands, cut-points, hybrid, feature or model code, or requirements differ from the tag | User decision: no changes after seeing results |
+| 2026-11-19 | Manual list stored defanged (also URLs embedded in paths); refanged only in memory; exact round-trip checked; nothing ever visited | User requirement |
+| 2026-11-19 | Overlap check: drop any manual-list URL whose registered domain is in the train or test split (domain column only). Removed 10 of 42 legitimate candidates; bit.ly replaced by buff.ly | User requirement; skews legitimate URLs toward smaller sites (documented) |
+| 2026-11-19 | OpenPhish feed (2026-11-19): 69 % of 300 URLs overlap PhiUSIIL (hosting platforms), 31 % do not. First attempt (sample then remove) kept 6 and was abandoned before evaluation; final: 25 sampled from the 93 independent URLs and 15 from the platform pool, seed 20261119 | User decision (option 1 + platform addition, both before any results) |
+| 2026-11-19 | OpenPhish URLs not committed (redistribution not confirmed): raw feed, sampled inputs and the full list are git-ignored; the committed list withholds them; reports show only id/category/score/tier/rules | User decision |
+| 2026-11-19 | Manual evaluation run once (2026-11-19T05:01:26Z, lock `reports/.manual_evaluated`); proposals in the report were NOT applied | User requirement; any change needs a new, separate list |
+
 ## Disclosures
 
 - **2 test rows seen before the split (not used for any decision).** Before the split existed, ~20 raw URLs were printed to verify the label direction (the UCI page is contradictory). Two of them later landed in the test set: `ecolabelindex.com` (legitimate homepage) and an `infura-ipfs.io` phishing URL. No feature, setting or threshold was based on them. Everything else that informed design used the train split only.
 - **Test set was viewed for the false-positive review** after the single evaluation. Findings go to the limitations and the Phase 3 rules, not back into the model.
 
 ## Open questions
+
+- **From the manual evaluation (proposals only, not applied):** 10 of 11 legitimate false alarms come from the subdomain bias; the rules changed no tier on the manual list; all 4 misses are short bare domains with phishing in the path. Fixes (retrain with legitimate subdomain URLs, cap subdomain-driven model tiers, path-aware signals) need a new design freeze and a **new, separate** evaluation list.
+- M9: whether to commit the 11.3 MB model file or keep the rebuild steps only; confirm nothing from the OpenPhish feed is pushed.
 
 - **From the hybrid evaluation:** on PhiUSIIL the rules barely change tiers (5 phishing escalated), because strong rules are rare there and the model already rates those URLs High. Their real-world value must be shown with the M8 hand-made list. Medium holds 62 % of legitimate test URLs, so the app must present Medium as "check carefully".
 

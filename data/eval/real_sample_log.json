@@ -1,0 +1,13 @@
+{
+  "feed_file": "openphish_feed.txt",
+  "source": "OpenPhish community feed (openphish.com/feed.txt)",
+  "downloaded": "2026-11-19",
+  "seed": 20261119,
+  "urls_in_feed": 300,
+  "unique_urls": 300,
+  "independent_pool_size": 93,
+  "platform_pool_size": 207,
+  "independent_sampled": 25,
+  "platform_sampled": 15,
+  "method": "Pools split by the overlap check (registered domain in PhiUSIIL train/test). 25 sampled from the independent pool, 15 from the platform pool, each with random.Random(seed).sample. First attempt (sample 25 from the whole feed, then remove overlaps) kept only 6 and was abandoned before any evaluation (user decision)."
+}

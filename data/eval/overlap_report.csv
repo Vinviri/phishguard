@@ -1,0 +1,11 @@
+url_defanged,label,category,overlapping_domain
+hxxps://docs[.]python[.]org/3/library/urllib.parse.html,legitimate,docs_subdomain,python.org
+hxxps://developer[.]mozilla[.]org/en-US/docs/Web/HTTP/Status/404,legitimate,docs_subdomain,mozilla.org
+hxxps://www[.]postgresql[.]org/docs/16/sql-select.html,legitimate,docs_subdomain,postgresql.org
+hxxps://cloud[.]google[.]com/storage/docs/introduction,legitimate,docs_subdomain,google.com
+hxxps://docs[.]djangoproject[.]com/en/5.0/topics/http/urls/,legitimate,docs_subdomain,djangoproject.com
+hxxps://accounts[.]google[.]com/ServiceLogin?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F,legitimate,login_redirect,google.com
+hxxps://stackoverflow[.]com/users/login?ssrc=head&returnurl=https%3a%2f%2fstackoverflow.com%2f,legitimate,login_redirect,stackoverflow.com
+hxxps://stackoverflow[.]com/questions/tagged/amazon-web-services,legitimate,brand_in_path,stackoverflow.com
+hxxps://www[.]etsy[.]com/listing/1234567890/handmade-ceramic-coffee-mug-blue-glaze?ref=hp_rv-1&frs=1,legitimate,long_ordinary,etsy.com
+hxxps://www[.]ikea[.]com/us/en/p/billy-bookcase-white-00263850/,legitimate,long_ordinary,ikea.com

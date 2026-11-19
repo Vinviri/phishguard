@@ -1,0 +1,84 @@
+id,url_defanged,label,category,source,notes
+M001,hxxps://scikit-learn[.]org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),long path
+M002,hxxps://pandas[.]pydata[.]org/docs/reference/api/pandas.read_csv.html,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M003,hxxps://docs[.]streamlit[.]io/develop/api-reference/widgets/st.text_input,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M004,hxxps://en[.]wikipedia[.]org/wiki/Phishing,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M005,hxxps://kubernetes[.]io/docs/concepts/overview/,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M006,hxxps://numpy[.]org/doc/stable/reference/generated/numpy.quantile.html,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M007,hxxps://learn[.]microsoft[.]com/en-us/dotnet/csharp/tour-of-csharp/,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M008,hxxps://fastapi[.]tiangolo[.]com/tutorial/first-steps/,legitimate,docs_subdomain,hand-written; real site; path not verified (never visited),
+M009,hxxps://github[.]com/scikit-learn/scikit-learn/blob/main/README.rst,legitimate,repo_path,hand-written; real site; path not verified (never visited),
+M010,hxxps://github[.]com/streamlit/streamlit/issues,legitimate,repo_path,hand-written; real site; path not verified (never visited),
+M011,hxxps://gitlab[.]com/gitlab-org/gitlab/-/issues,legitimate,repo_path,hand-written; real site; path not verified (never visited),
+M012,hxxps://bitbucket[.]org/atlassian/python-bitbucket/src/master/,legitimate,repo_path,hand-written; real site; path not verified (never visited),
+M013,hxxps://github[.]com/login?return_to=https%3A%2F%2Fgithub.com%2Fsettings%2Fprofile,legitimate,login_redirect,hand-written; real site; path not verified (never visited),full URL in query
+M014,hxxps://login[.]microsoftonline[.]com/common/oauth2/v2.0/authorize?client_id=00000000-0000-0000-0000-000000000000&redirect_uri=https%3A%2F%2Fportal.azure.com,legitimate,login_redirect,hand-written; real site; path not verified (never visited),OAuth redirect_uri
+M015,hxxps://www[.]reddit[.]com/login/?dest=https%3A%2F%2Fwww.reddit.com%2Fr%2Fpython%2F,legitimate,login_redirect,hand-written; real site; path not verified (never visited),
+M016,hxxps://news[.]ycombinator[.]com/login?goto=news,legitimate,login_redirect,hand-written; real site; path not verified (never visited),relative redirect
+M017,hxxps://discord[.]com/login?redirect_to=%2Fchannels%2F%40me,legitimate,login_redirect,hand-written; real site; path not verified (never visited),relative ?redirect_to=
+M018,hxxps://www[.]figma[.]com/login?next=%2Ffiles%2Frecent,legitimate,login_redirect,hand-written; real site; path not verified (never visited),relative ?next=
+M019,hxxps://id[.]atlassian[.]com/login?continue=https%3A%2F%2Fwww.atlassian.com%2F,legitimate,login_redirect,hand-written; real site; path not verified (never visited),?continue= with a full URL
+M020,hxxps://web[.]archive[.]org/web/2020/hxxps://www[.]python[.]org/,legitimate,archive,hand-written; real site; path not verified (never visited),archived copy of python.org
+M021,hxxps://buff[.]ly/3Xk9PyDocs,legitimate,shortener,hand-written; real site; path not verified (never visited),Buffer link shortener; destination unknown by nature; label assumed legitimate (bit.ly was dropped: it overlaps the dataset)
+M022,hxxps://www[.]bücher[.]de/,legitimate,idn_single_script,hand-written; real site; path not verified (never visited),German umlaut (Latin script only)
+M023,hxxps://президент[.]рф/,legitimate,idn_single_script,hand-written; real site; path not verified (never visited),all Cyrillic
+M024,hxxps://github[.]com/paypal/paypal-js,legitimate,brand_in_path,hand-written; real site; path not verified (never visited),brand in path on a code host
+M025,hxxps://www[.]npmjs[.]com/package/@paypal/react-paypal-js,legitimate,brand_in_path,hand-written; real site; path not verified (never visited),
+M026,hxxps://pypi[.]org/project/google-cloud-storage/,legitimate,brand_in_path,hand-written; real site; path not verified (never visited),
+M027,hxxps://www[.]nytimes[.]com/2024/05/01/technology/artificial-intelligence-regulation.html,legitimate,long_ordinary,hand-written; real site; path not verified (never visited),
+M028,hxxps://www[.]booking[.]com/hotel/nl/example-amsterdam.html?checkin=2025-06-01&checkout=2025-06-03&group_adults=2,legitimate,long_ordinary,hand-written; real site; path not verified (never visited),
+M029,hxxps://arxiv[.]org/abs/1706.03762,legitimate,long_ordinary,hand-written; real site; path not verified (never visited),
+M030,hxxps://www[.]youtube[.]com/watch?v=dQw4w9WgXcQ&list=PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI,legitimate,long_ordinary,hand-written; real site; path not verified (never visited),
+M031,hxxps://support[.]apple[.]com/en-us/102208,legitimate,long_ordinary,hand-written; real site; path not verified (never visited),brand's own support subdomain
+M032,hxxps://www[.]theguardian[.]com/technology/2024/jan/15/ai-chatbots-regulation-europe,legitimate,long_ordinary,hand-written; real site; path not verified (never visited),
+M033,hxxp://203[.]0[.]113[.]45/secure-login/paypal/verify.php,phishing,syn_ip_host,synthetic,"invented domain, never resolved or visited; built to use a rule trick. documentation IP range"
+M034,hxxp://3405803821/account/update/login,phishing,syn_ip_host,synthetic,"invented domain, never resolved or visited; built to use a rule trick. decimal form of 203.0.113.45"
+M035,hxxp://www[.]paypal[.]com@secure-verify-account-x7q2vn[.]top/login,phishing,syn_at_trick,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M036,hxxps://paypal[.]com[.]resolution-center-k8m3vqz[.]xyz/signin?country=US,phishing,syn_brand_subdomain,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M037,hxxp://secure[.]chase[.]com[.]online-banking-verify-t6r2pk[.]info/login/verify-account,phishing,syn_brand_subdomain,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M038,hxxps://аpple-id-support-q3n8xv[.]com/signin,phishing,syn_lookalike,synthetic,"invented domain, never resolved or visited; built to use a rule trick. mixed Latin + Cyrillic, Unicode form"
+M039,hxxps://xn--aypal-resolution-k7m2wq-k2s[.]com/webapps/signin,phishing,syn_lookalike,synthetic,"invented domain, never resolved or visited; built to use a rule trick. mixed Latin + Cyrillic, punycode form"
+M040,hxxps://cdn-static-files-n2k7rq[.]site//secure-paypal-login-h5j9wd[.]top/verify,phishing,syn_embedded_url,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M041,hxxps://redirect-gateway-z8p4qm[.]click/r/hxxps://appleid-verify-w3k6tb[.]top/,phishing,syn_embedded_url,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M042,hxxp://invoice-docs-share-m7v2xc[.]top/files/Invoice_2025_0193.zip,phishing,syn_risky_extension,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M043,hxxps://update-player-q9w2jd[.]xyz/download/PlayerUpdate.exe,phishing,syn_risky_extension,synthetic,"invented domain, never resolved or visited; built to use a rule trick"
+M044,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M045,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M046,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M047,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M048,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M049,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M050,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M051,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M052,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M053,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M054,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M055,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M056,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M057,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M058,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M059,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M060,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M061,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M062,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M063,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M064,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M065,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M066,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M067,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M068,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_feed,OpenPhish community feed (openphish.com/feed.txt),2026-11-19
+M069,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M070,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M071,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M072,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M073,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M074,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M075,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M076,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M077,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M078,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M079,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M080,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M081,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M082,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only
+M083,"[withheld: OpenPhish feed, redistribution not confirmed]",phishing,real_platform,OpenPhish community feed (openphish.com/feed.txt),not independent of training; descriptive only

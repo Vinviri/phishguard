@@ -1,0 +1,68 @@
+{
+  "raw_rows": 235795,
+  "missing": {
+    "url_nan_or_blank": 0,
+    "label_nan": 0
+  },
+  "duplicates": {
+    "conflicting_label_urls_dropped": 0,
+    "exact_duplicates_removed": 425
+  },
+  "clean_rows": 235370,
+  "registered_domains": {
+    "unique": 175509,
+    "largest_groups": {
+      "web.app": 5718,
+      "firebaseapp.com": 5546,
+      "repl.co": 3746,
+      "weeblysite.com": 3079,
+      "ipfs.io": 1552,
+      "workers.dev": 1423,
+      "square.site": 1187,
+      "dweb.link": 959,
+      "xsph.ru": 928,
+      "pantheonsite.io": 891
+    },
+    "domains_with_both_labels": 120
+  },
+  "class_distribution": {
+    "all": {
+      "rows": 235370,
+      "phishing": 100520,
+      "legitimate": 134850,
+      "phishing_share": 0.4271
+    },
+    "train": {
+      "rows": 188296,
+      "phishing": 80416,
+      "legitimate": 107880,
+      "phishing_share": 0.4271
+    },
+    "test": {
+      "rows": 47074,
+      "phishing": 20104,
+      "legitimate": 26970,
+      "phishing_share": 0.4271
+    }
+  },
+  "bias_train_only": {
+    "legitimate": {
+      "https": 1.0,
+      "has_scheme": 1.0,
+      "host_starts_www": 1.0,
+      "non_root_path": 0.0,
+      "has_query": 0.0,
+      "trailing_slash": 0.0,
+      "url_len_median": 27.0
+    },
+    "phishing": {
+      "https": 0.5002,
+      "has_scheme": 1.0,
+      "host_starts_www": 0.4081,
+      "non_root_path": 0.2817,
+      "has_query": 0.0621,
+      "trailing_slash": 0.3697,
+      "url_len_median": 34.0
+    }
+  }
+}

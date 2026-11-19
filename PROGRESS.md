@@ -26,7 +26,7 @@
 
 | M8 Testing & docs | Done | Manual list (32 legit, 25 real + 11 synthetic phishing, 15 platform descriptive), one locked run after tag `m8-start`: real phishing High 13/25, missed 4/25; legit High 11/32. Final README, `reports/manual_evaluation.md`, `reports/test_summary.md` (366 passed) |
 
-| M9 GitHub | In progress | Release prepared locally (MIT LICENSE, model committed with SHA-256, README headline). Pre-push checks done (no local paths, no OpenPhish URLs in history); author email rewritten to the GitHub no-reply address |
+| M9 GitHub | Done | Public repo https://github.com/Vinviri/phishguard, tags `m6-frozen`, `m8-start`, `v1.0` (`8bc1829`). Fresh clone + new venv + `pip install -r requirements.txt`: 366 passed, 0 skipped; app started headless, health check ok |
 
 
 

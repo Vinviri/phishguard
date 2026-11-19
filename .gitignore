@@ -23,3 +23,6 @@ models/*.pkl
 .idea/
 .DS_Store
 Thumbs.db
+
+# Regenerable feature tables (python -m src.model build-features)
+data/processed/features_*.csv

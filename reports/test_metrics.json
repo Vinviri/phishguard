@@ -1,0 +1,116 @@
+{
+  "n_test": 47074,
+  "threshold": 0.38617432357764125,
+  "models": {
+    "random_forest": {
+      "threshold": 0.38617432357764125,
+      "pr_auc": 0.9084665889959036,
+      "per_class": {
+        "legitimate": {
+          "precision": 0.8397067428492755,
+          "recall": 0.9045606229143492,
+          "f1-score": 0.8709280117094764,
+          "support": 26970.0
+        },
+        "phishing": {
+          "precision": 0.8571666389212586,
+          "recall": 0.7683545563072025,
+          "f1-score": 0.8103344262295082,
+          "support": 20104.0
+        }
+      },
+      "accuracy": 0.846390788970557,
+      "confusion_matrix": [
+        [
+          24396,
+          2574
+        ],
+        [
+          4657,
+          15447
+        ]
+      ]
+    },
+    "logreg": {
+      "threshold": 0.5,
+      "pr_auc": 0.9100114580409567,
+      "per_class": {
+        "legitimate": {
+          "precision": 0.8220433004723111,
+          "recall": 0.9615498702261772,
+          "f1-score": 0.8863407214997351,
+          "support": 26970.0
+        },
+        "phishing": {
+          "precision": 0.9332131126424937,
+          "recall": 0.7207520891364902,
+          "f1-score": 0.8133367011871685,
+          "support": 20104.0
+        }
+      },
+      "accuracy": 0.8587118154395208,
+      "confusion_matrix": [
+        [
+          25933,
+          1037
+        ],
+        [
+          5614,
+          14490
+        ]
+      ]
+    },
+    "majority": {
+      "threshold": 0.5,
+      "pr_auc": 0.4270722691931852,
+      "per_class": {
+        "legitimate": {
+          "precision": 0.5729277308068148,
+          "recall": 1.0,
+          "f1-score": 0.7284857652206796,
+          "support": 26970.0
+        },
+        "phishing": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1-score": 0.0,
+          "support": 20104.0
+        }
+      },
+      "accuracy": 0.5729277308068148,
+      "confusion_matrix": [
+        [
+          26970,
+          0
+        ],
+        [
+          20104,
+          0
+        ]
+      ]
+    }
+  },
+  "mdi_importance": {
+    "tld": 0.2169,
+    "host_num_subdomains": 0.1904,
+    "host_num_dots": 0.0986,
+    "host_length": 0.0871,
+    "host_num_digits": 0.0801,
+    "host_digit_ratio": 0.0799,
+    "host_entropy": 0.0675,
+    "host_tld_length": 0.0455,
+    "host_num_hyphens": 0.0424,
+    "host_domain_length": 0.039,
+    "host_max_label_length": 0.0307,
+    "host_brand_keyword_count": 0.0114,
+    "host_suspicious_keyword_count": 0.0085,
+    "host_is_ip": 0.001,
+    "host_tld_known": 0.0008,
+    "host_has_punycode": 0.0002,
+    "host_is_ipv6": 0.0,
+    "host_is_obfuscated_ip": 0.0,
+    "host_non_ascii": 0.0
+  },
+  "n_false_positives": 2574,
+  "fp_review_base_rate": 0.5000126662276418
+}

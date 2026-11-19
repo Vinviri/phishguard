@@ -1,0 +1,180 @@
+{
+  "n_train": 188296,
+  "cv": "StratifiedGroupKFold(5) by registered_domain, seed 42",
+  "baselines_cv": {
+    "majority": {
+      "pr_auc": {
+        "mean": 0.4270722692490036,
+        "std": 9.405968802422922e-06
+      },
+      "f1": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "precision": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "recall": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "logreg": {
+      "pr_auc": {
+        "mean": 0.898587351509053,
+        "std": 0.0055895273278038895
+      },
+      "f1": {
+        "mean": 0.7851315927538159,
+        "std": 0.019866157875453726
+      },
+      "precision": {
+        "mean": 0.9246967446353394,
+        "std": 0.004242844668240236
+      },
+      "recall": {
+        "mean": 0.6828242892506933,
+        "std": 0.03040810070411035
+      }
+    }
+  },
+  "diagnostic_full_url_rf_cv": {
+    "pr_auc": {
+      "mean": 0.9987692261783752,
+      "std": 0.00025009514531284215
+    },
+    "f1": {
+      "mean": 0.9974905589861367,
+      "std": 0.0003183350305618365
+    },
+    "precision": {
+      "mean": 0.9989526007042002,
+      "std": 0.0003964937604311495
+    },
+    "recall": {
+      "mean": 0.9960331410316569,
+      "std": 0.0006283472659060228
+    }
+  },
+  "grid_best": {
+    "params": {
+      "class_weight": "balanced",
+      "max_depth": 30,
+      "min_samples_leaf": 5,
+      "n_estimators": 200
+    },
+    "pr_auc_mean": 0.8964431097075535,
+    "pr_auc_std": 0.010469322433925772
+  },
+  "selection_rule": "simplest config (fewest trees, then limited depth, then larger leaves) within 1 SE of best mean CV PR-AUC",
+  "chosen": {
+    "params": {
+      "class_weight": "balanced",
+      "max_depth": 30,
+      "min_samples_leaf": 5,
+      "n_estimators": 200
+    },
+    "pr_auc_mean": 0.8964431097075535,
+    "pr_auc_std": 0.010469322433925772,
+    "f1_mean": 0.7878340286843458
+  },
+  "threshold": {
+    "value": 0.38617432357764125,
+    "source": "out-of-fold CV predictions on train (chosen config)",
+    "rule": "use max-F1 OOF threshold only if it beats 0.5 by > 0.005 F1, else 0.5",
+    "oof_f1_at_0.5": 0.7882267669087446,
+    "oof_max_f1": 0.7932314323342777,
+    "oof_max_f1_threshold": 0.38617432357764125,
+    "oof_metrics_at_chosen": {
+      "pr_auc": 0.8964480427499355,
+      "f1": 0.7932314323342778,
+      "precision": 0.8527300288876812,
+      "recall": 0.7414942300039793
+    }
+  },
+  "permutation_importance_train_fold": {
+    "host_length": {
+      "mean": 0.005070019019251392,
+      "std": 0.0008805698054958932
+    },
+    "host_num_dots": {
+      "mean": 0.017629117234160652,
+      "std": 0.0006980621799849539
+    },
+    "host_num_hyphens": {
+      "mean": 0.009689719843757504,
+      "std": 0.0015308306962469413
+    },
+    "host_num_digits": {
+      "mean": 0.00858208170788799,
+      "std": 0.0012993867375696423
+    },
+    "host_digit_ratio": {
+      "mean": 0.007162858887096779,
+      "std": 0.001392212622960645
+    },
+    "host_entropy": {
+      "mean": 0.0035709639123522987,
+      "std": 0.000538673470320123
+    },
+    "host_num_subdomains": {
+      "mean": 0.09535487943826038,
+      "std": 0.0029519563435791993
+    },
+    "host_max_label_length": {
+      "mean": 0.001109439064359319,
+      "std": 0.0006310867271185918
+    },
+    "host_is_ip": {
+      "mean": 3.311721567089698e-05,
+      "std": 8.877350076226321e-05
+    },
+    "host_is_ipv6": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "host_is_obfuscated_ip": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "host_has_punycode": {
+      "mean": -5.316134821442553e-06,
+      "std": 1.5905351383390945e-05
+    },
+    "host_non_ascii": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "host_domain_length": {
+      "mean": 0.0013898652889367201,
+      "std": 0.00035542763492714977
+    },
+    "host_tld_length": {
+      "mean": 0.010942478191520454,
+      "std": 0.0003928482577217076
+    },
+    "host_tld_known": {
+      "mean": 3.063629073967178e-05,
+      "std": 8.258930387823466e-05
+    },
+    "host_suspicious_keyword_count": {
+      "mean": 0.0027667936280268758,
+      "std": 0.0009817598585580593
+    },
+    "host_brand_keyword_count": {
+      "mean": 0.003518342159561638,
+      "std": 0.0001927688215207236
+    },
+    "tld": {
+      "mean": 0.05676896432683278,
+      "std": 0.00161355227304911
+    }
+  },
+  "final_fit_seconds": 19.3,
+  "model_size": {
+    "file_mb": 11.3,
+    "total_nodes": 471910,
+    "mean_depth": 30.0
+  }
+}

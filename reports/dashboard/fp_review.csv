@@ -1,0 +1,21 @@
+rank,url,phishing_probability,top_contributors,pattern,top_feature,top_contribution
+1,https://www.homesforsale.inwyckoffnj.com,0.9866,host_num_subdomains=1 (+0.161); host_length=28 (+0.122); host_num_dots=2 (+0.105),Subdomain,host_num_subdomains,0.161
+2,https://www.prestigevenuesandevents.sodexo.com,0.9846,host_num_subdomains=1 (+0.163); host_length=34 (+0.139); host_num_dots=2 (+0.121),Subdomain,host_num_subdomains,0.163
+3,https://www.pizziniholywood.eatdirect.com,0.9802,host_num_subdomains=1 (+0.163); host_length=29 (+0.121); host_num_dots=2 (+0.109),Subdomain,host_num_subdomains,0.163
+4,https://www.insurance.harley-davidson.com,0.971,host_num_subdomains=1 (+0.159); host_length=29 (+0.114); host_num_dots=2 (+0.091),Subdomain,host_num_subdomains,0.159
+5,https://www.travelmatters.stephenandandie.com,0.9694,host_num_subdomains=1 (+0.205); host_length=33 (+0.156); host_num_dots=2 (+0.124),Subdomain,host_num_subdomains,0.205
+6,https://www.weirdscifi.ratiosemper.com,0.9689,host_num_subdomains=1 (+0.210); host_num_dots=2 (+0.124); host_length=26 (+0.119),Subdomain,host_num_subdomains,0.21
+7,https://www.phuket.holidayinnresorts.com,0.9631,host_num_subdomains=1 (+0.200); host_length=28 (+0.120); host_num_dots=2 (+0.111),Subdomain,host_num_subdomains,0.2
+8,https://www.mendel-rodnydum.vrazne.cz,0.955,host_num_subdomains=1 (+0.151); host_length=25 (+0.094); host_num_dots=2 (+0.085),Subdomain,host_num_subdomains,0.151
+9,https://www.garageguide.theaa.com,0.9484,host_num_subdomains=1 (+0.207); host_num_dots=2 (+0.137); tld=com (+0.055),Subdomain,host_num_subdomains,0.207
+10,https://www.store.tactical-performance.com,0.9474,host_num_subdomains=1 (+0.195); host_length=30 (+0.136); host_num_dots=2 (+0.099),Subdomain,host_num_subdomains,0.195
+11,https://www.6717000.com,0.9448,host_digit_ratio=0.636 (+0.288); host_num_digits=7 (+0.270); host_domain_length=7 (+0.026),Numeric domain,host_digit_ratio,0.288
+12,https://www.resources.immobiliarecaserio.com,0.9421,host_num_subdomains=1 (+0.212); host_length=32 (+0.157); host_num_dots=2 (+0.128),Subdomain,host_num_subdomains,0.212
+13,https://www.kore.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+14,https://www.kilt.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+15,https://www.feem.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+16,https://www.tfir.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+17,https://www.cncf.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+18,https://www.jaxx.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+19,https://www.dock.io,0.9406,tld=io (+0.391); host_entropy=2.521 (+0.065); host_domain_length=4 (+0.046),.io domain,tld,0.391
+20,https://www.jud10.flcourts.org,0.9396,host_num_subdomains=1 (+0.167); host_digit_ratio=0.111 (+0.107); host_num_digits=2 (+0.102),Subdomain,host_num_subdomains,0.167

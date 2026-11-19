@@ -1,0 +1,5 @@
+model,pr_auc_mean,pr_auc_std,f1_mean,used
+Majority class,0.4271,0.0,0.0,baseline
+Logistic regression,0.8986,0.0056,0.7851,baseline
+Random Forest (chosen),0.8964,0.0105,0.7878,shipped
+RF on all URL features (diagnostic),0.9988,0.0003,0.9975,not used

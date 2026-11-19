@@ -1,0 +1,17 @@
+config,n_estimators,max_depth,min_leaf,class_weight,pr_auc_mean,pr_auc_std,f1_mean,fit_time_s,chosen
+200 trees · depth 30 · leaf 5 · balanced,200,30,5,balanced,0.8964,0.0105,0.7878,14.53,yes
+400 trees · depth 30 · leaf 5 · balanced,400,30,5,balanced,0.8962,0.0112,0.7881,28.1823,no
+400 trees · depth 30 · leaf 5 · none,400,30,5,none,0.8955,0.0119,0.7832,28.8542,no
+200 trees · depth 30 · leaf 5 · none,200,30,5,none,0.8952,0.0123,0.7831,16.2137,no
+400 trees · depth unlimited · leaf 5 · balanced,400,unlimited,5,balanced,0.895,0.0159,0.7922,32.2012,no
+200 trees · depth unlimited · leaf 5 · balanced,200,unlimited,5,balanced,0.8949,0.016,0.7921,15.8232,no
+400 trees · depth unlimited · leaf 5 · none,400,unlimited,5,none,0.8948,0.0155,0.7871,36.0029,no
+200 trees · depth unlimited · leaf 5 · none,200,unlimited,5,none,0.8946,0.0158,0.787,18.1279,no
+200 trees · depth 30 · leaf 1 · balanced,200,30,1,balanced,0.8943,0.0114,0.7878,15.2882,no
+400 trees · depth 30 · leaf 1 · balanced,400,30,1,balanced,0.8941,0.0117,0.7882,31.8846,no
+400 trees · depth 30 · leaf 1 · none,400,30,1,none,0.8939,0.0129,0.7846,33.1379,no
+200 trees · depth 30 · leaf 1 · none,200,30,1,none,0.8938,0.013,0.7847,16.2853,no
+400 trees · depth unlimited · leaf 1 · none,400,unlimited,1,none,0.8834,0.0161,0.7823,34.4614,no
+200 trees · depth unlimited · leaf 1 · none,200,unlimited,1,none,0.8831,0.016,0.7824,17.4955,no
+400 trees · depth unlimited · leaf 1 · balanced,400,unlimited,1,balanced,0.8823,0.0161,0.7823,35.203,no
+200 trees · depth unlimited · leaf 1 · balanced,200,unlimited,1,balanced,0.8818,0.016,0.7823,18.8682,no

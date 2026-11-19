@@ -1,0 +1,3 @@
+split,rows,phishing,legitimate
+Train,188296,80416,107880
+Test,47074,20104,26970
